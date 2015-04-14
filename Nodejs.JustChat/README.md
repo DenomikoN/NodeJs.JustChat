@@ -1,0 +1,9 @@
+﻿# JustChat
+
+
+**Links:**
+
+https://github.com/andrey-karavaychik/nodejs-meetup
+
+https://webmail.itechart-group.com/owa/redir.aspx?SURL=t4iKNyDs1cYsZG_aTKnumZB8PLRBekJFv9n0thzIOotAXGIC-kHSCGgAdAB0AHAAcwA6AC8ALwBkAG8AYwBzAC4AZwBvAG8AZwBsAGUALgBjAG8AbQAvAGQAbwBjAHUAbQBlAG4AdAAvAGQALwAxAHkAdABjADYAUQA1ADQAZgBfAE8ALQBXADQAZQBVAGQAUgBPAE4AMwBJAEkANgBHAHIAVQBNAEcATgBHAEEAMABmAGoARwB5AEsAUAB2AEoAWABwADgALwBlAGQAaQB0AD8AdQBzAHAAPQBzAGgAYQByAGkAbgBnAA..&URL=https%3a%2f%2fdocs.google.com%2fdocument%2fd%2f1ytc6Q54f_O-W4eUdRON3II6GrUMGNGA0fjGyKPvJXp8%2fedit%3fusp%3dsharing
+
