@@ -8,5 +8,13 @@
 <% block 'scripts' : %>
    <script src="/extjs/ext-all-debug.js"></script>	
    <script src="/extjs/resources/gray/ext-theme-gray.js"></script>	
-   <script src="/app/app.js"></script>
+   <script>
+	   Ext.Loader.setConfig({
+			enabled: true,
+			paths: {
+				'JustChat': 'JustChat'
+			}
+		});
+   </script>
+   <script src="/JustChat.js"></script>
 <% end %>
