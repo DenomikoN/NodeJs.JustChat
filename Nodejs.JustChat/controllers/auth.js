@@ -1,19 +1,22 @@
 ﻿var express = require('express');
 var router = express.Router();
 
+var storage = require('../data/mstorage');
+
 router.post('/login', function (req, res) {
    'use strict';
     var username = req.body.username;
     console.log('Register: ' + username);
-    var user = {
-        username: username,
-        loginTime: new Date()
+    
+    var user = storage.registerUser(req.body.username);
+    var sessionUser = {
+        id: user.id,
+        login: user.login
     };
 
-    req.session.user = user;
-    res.locals.user = user;
+    req.session.user = sessionUser;
+    res.locals.user = sessionUser;
     res.redirect('/');
-
 });
 
 router.post('/logout', function (req, res) {

@@ -23,4 +23,5 @@ module.exports.apply = function (app) {
     app.use('/', require('../controllers/index'));
     app.use('/chat', require('../controllers/chat'));
     app.use('/auth', require('../controllers/auth'));
+    app.use('/rest', require('../controllers/rest'));
 }

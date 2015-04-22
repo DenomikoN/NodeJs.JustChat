@@ -1,36 +1,23 @@
 ﻿Ext.define('JustChat.view.main.Main', {
-    extend: 'Ext.container.Container',
+    extend: 'Ext.container.Viewport',
     
-    xtype: 'app-main',
+    requires: [
+        'JustChat.view.users.Users',
+        'JustChat.view.main.MainController'
+    ],
     
+    layout: 'border',
+
     controller: 'main',
-    viewModel: {
-        type: 'main'
-    },
-    
-    layout: {
-        type: 'border'
-    },
-    
+
     items: [{
-            xtype: 'panel',
-            bind: {
-                title: '{name}'
-            },
-            region: 'west',
-            html: '<ul>...</ul>',
-            width: 250,
-            split: true,
-            tbar: [{
-                    text: 'Button',
-                    handler: 'onClickButton'
-                }]
-        }, {
             region: 'center',
             xtype: 'tabpanel',
-            items: [{
-                    title: 'Tab 1',
-                    html: '<h2>Content ...</h2>'
-                }]
+            id: 'chatContainer'
+        },{
+            region: 'north',
+            xtype: 'container',
+            html:"<h1>Just Chat</h1>",
+            padding:'0 10'
         }]
 });
