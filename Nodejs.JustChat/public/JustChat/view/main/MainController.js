@@ -5,7 +5,7 @@
 
     init: function () {
         
-    },
+    }
 
    
 });

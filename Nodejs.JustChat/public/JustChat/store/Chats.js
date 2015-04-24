@@ -1,4 +1,4 @@
-﻿Ext.define('JustChat.store.ChatStore', {
+﻿Ext.define('JustChat.store.Chats', {
     extend: 'Ext.data.Store',
     storeId: 'chatsStore',
 

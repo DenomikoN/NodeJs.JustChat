@@ -2,13 +2,13 @@
     extend: 'Ext.container.Viewport',
     
     requires: [
-        'JustChat.view.users.Users',
-        'JustChat.view.main.MainController'
+   //     'JustChat.view.users.Users',
+ //       'JustChat.view.main.MainController'
     ],
     
     layout: 'border',
 
-    controller: 'main',
+   // controller: 'main',
 
     items: [{
             region: 'center',
@@ -18,6 +18,6 @@
             region: 'north',
             xtype: 'container',
             html:"<h1>Just Chat</h1>",
-            padding:'0 10'
+            padding:'0 20'
         }]
 });

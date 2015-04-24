@@ -9,9 +9,11 @@ Ext.define('JustChat.Application', {
 
     autoCreateViewport: 'JustChat.view.main.Main',
     
-    controllers: [],
+    controllers: [
+        'MainController'
+    ],
 
-    stores: ['UsersStore', 'ChatStore'],
+    stores: [],
     
     models: [
         'UserModel',
