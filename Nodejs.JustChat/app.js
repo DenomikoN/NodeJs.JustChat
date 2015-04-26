@@ -1,4 +1,5 @@
 ﻿var express = require('express');
+var sio = require('socket.io');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -6,6 +7,7 @@ var bodyParser = require('body-parser');
 
 
 var app = express();
+app.io = sio();
 
 require('./config/render').apply(app, path.join(__dirname, 'views'));
 

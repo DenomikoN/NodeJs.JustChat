@@ -2,6 +2,6 @@
     extend: 'Ext.data.Store',
     storeId: 'chatsStore',
 
-    model: 'JustChat.model.ChatModel',
+    model: 'JustChat.model.Chat',
     autoLoad: true
 });

@@ -77,9 +77,9 @@ me.registerUser = function (login) {
 }
 
 me.findChatById = function (id) {
-    me.chats.forEach(function (chat) {
-        if (chat.id === id) return chat;
-    })
+    return me.chats.firstOrDefault(function (chat) {
+        return chat.id === id;
+    });
     return null;
 };
 me.getDefaultChats = function () {

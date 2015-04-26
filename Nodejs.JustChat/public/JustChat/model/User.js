@@ -1,13 +1,14 @@
-﻿Ext.define('JustChat.model.UserModel', {
-    extend: 'Ext.data.Model',
+﻿Ext.define('JustChat.model.User', {
+    extend: 'JustChat.model.Base',
     fields: [
         { name: 'login', type: 'string' }
     ],
-    manyToMany: 'JustChat.model.ChatModel',
+    manyToMany: 'Chat',
 
     proxy: {
         type: 'rest',
         url : '/rest/user',
+        appendId: true,
         reader: {
             type: 'json',
             rootProperty: 'data'

@@ -1,25 +1,52 @@
-﻿var express = require('express');
+﻿'use strict';
+var express = require('express');
 var router = express.Router();
 
 var storage = require('../data/mstorage');
 
 router.post('/login', function(req, res){
-    'use strict';
     var username = req.body.username;
     console.log('Register: ' + username);
     var user = storage.registerUser(req.body.username);
-    var sessionUser = {
-        id : user.id,
-        login : user.login
-    };
-    req.session.user = sessionUser;
-    res.locals.user = sessionUser;
-    res.redirect('/');
+    if (!!user) {
+        var sessionUser = {
+            id : user.id,
+            login : user.login
+        };
+        req.session.user = sessionUser;
+        res.locals.user = sessionUser;
+        
+        res.json({
+            sucess: true,
+            data: sessionUser
+        });
+    } else {
+        res.json({
+            sucess: false
+        });
+    }
+});
+
+router.post('/current', function (req, res) {
+    var user = req.session.user;
+    if (!!user) {
+        res.json({
+            success: true,
+            data: {
+                id : user.id,
+                login : user.login
+            }
+        });
+    } else {
+        res.json({
+            success: false
+        });
+    }
 });
 
 router.post('/logout', function(req, res){
     req.session.destroy();
-    res.redirect('/chat');
+    res.json(null);
 });
 
 

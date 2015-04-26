@@ -7,8 +7,6 @@ Ext.define('JustChat.Application', {
     appFolder: 'JustChat',
     name: 'JustChat',
 
-    autoCreateViewport: 'JustChat.view.main.Main',
-    
     controllers: [
         'MainController'
     ],
@@ -16,12 +14,11 @@ Ext.define('JustChat.Application', {
     stores: [],
     
     models: [
-        'UserModel',
-        'ChatModel'
+        'User',
+        'Chat'
     ],
 
     launch: function () {
-        debugger;
         // TODO - Launch the application
     }
 });

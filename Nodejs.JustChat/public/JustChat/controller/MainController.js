@@ -1,40 +1,92 @@
 ﻿Ext.define('JustChat.controller.MainController', {
     extend: 'Ext.app.Controller',
-   
-
-    stores: [
-        "Chats"
-    ],
-    views: [
-        'main.Main'
-    ],
     
-
+    requires: [
+        'JustChat.view.login.Login',
+        'JustChat.view.main.Main'
+    ],
     
     init: function () {
-        this.initializeChats();
-
-        this.control({
-
+      
+    },
+    
+    onLaunch: function () {
+        this.session = new Ext.data.Session({
+            autoDestroy: false
         });
-
-    },
-
-
-    initializeChats: function () {
-        var chatsStore = this.getChatsStore();
-
-        chatsStore.on('add', this.addChats.bind(this));
-        chatsStore.on('load', this.addChats.bind(this));
-        chatsStore.on('remove', this.removeChats.bind(this));
-
-    },
-    addChats: function (chatsStore, chats) {
-        var mainView = this.getView('main.Main');
         
-        debugger;
+        this.loginManager = new JustChat.LoginManager({
+            session: this.session,
+            model: 'User'
+        });
+        
+        this.loginManager.checkLogin({
+            scope: this,
+            success: 'onCheckLoginSuccess',
+            failure: 'onCheckLoginFailure'
+        });
+                
     },
-    removeChats: function (chatsStore, chats) {
-        debugger;
+    
+    onCheckLoginSuccess: function (user) {
+        this.currentUser = user;
+        Ext.getBody().unmask();
+        this.showUI();
+    },
+    onCheckLoginFailure: function () {
+        this.showLoginUI();
+    },
+    
+    onLoginRequest: function (loginData) {
+        this.loginManager.login({
+            scope: this,
+            data: loginData,
+            success: 'onLoginSuccess',
+            failure: 'onLoginFailure'
+        });
+    },
+    
+    onLoginSuccess: function (user) {
+        this.currentUser = user;
+        Ext.getBody().unmask();
+        this.login.destroy();
+        this.showUI();
+    },
+    onLoginFailure: function () {
+        
+    },
+    
+    
+    showLoginUI: function () {
+        this.login = new JustChat.view.login.Login({
+            session: this.session,
+            autoShow: true,
+            listeners: {
+                scope: this,
+                loginRequest: 'onLoginRequest'
+            }
+        });
+    },
+    
+    showUI: function () {
+        this.initWebSocket();
+        this.viewport = new JustChat.view.main.Main({
+            session: this.session,
+            viewModel: {
+                data: {
+                    currentUser: this.currentUser,
+                    socket:this.socket
+                }
+            }
+        });
+    },
+    
+    getSession: function () {
+        return this.session;
+    },
+    
+    initWebSocket: function () {
+        this.socket = io.connect();
+        this.socket.emit('join', 'Hello World from client');
     }
 });

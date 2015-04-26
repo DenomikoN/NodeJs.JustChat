@@ -4,66 +4,55 @@ var storage = require('../data/mstorage');
 var router = express.Router();
 
 router.route('/user')
-.get(function(req, res){
-    res.json({
-        success : true,
-        total : 3,
-        data : [{
-                id : 1,
-                login : 'Test1'
-            }, {
-                id : 2,
-                login : 'Test2'
-            }, {
-                id : 3,
-                login : 'Test3'
-            }]
+.get(function (req, res){
+    var filter = req.query.filter;
+    
+    if (!!filter) {
+        filter = JSON.parse(filter);
+        var chatId = filter[0].value;
 
-    });
+        var chat = storage.findChatById(chatId);
 
-}).post(function(req, res){
-    res.json([{
-            2 : 3
-        }]);
-
+        res.jsonWithReplacer({
+            success: true,
+            data: chat.users
+        }, 'ignoreArraysByKeys', ['chats']);
+    } else {
+        res.json({
+            success : false
+        });
+    }
+    
 });
 
-router.route('/user/:user_id')
-.get(function(req, res){
-    res.json([{
-            2 : 3
-        }]);
-
-}).put(function(req, res){
-    res.json([{
-            2 : 3
-        }]);
-
-}).delete(function(req, res){
-    res.json([{
-            2 : 3
-        }]);
+router.route('/user/:id')
+.get(function (req, res) {
+    var user = storage.findUserById(parseInt(req.params.id,10));
+    if (!!user) {
+        res.json({
+            success: true,
+            data: {
+                id : user.id,
+                login : user.login
+            }
+        });
+    } else {
+        res.json({ success: false });
+    }
 });
+
 
 router.route('/chat')
 .get(function(req, res){
     var user = storage.findUserById(req.user.id);
-    res.jsonWithReplacer(user.chats, 'ignoreArraysByKeys', ['users']);
-});
-
-router.route('/chat/:chat_id')
-.get(function(req, res){
-    res.json({
-        success: true,
-        total: 1,
-        data: [{
-                id : 0,
-                title : "Home",
-                isPrivate : false,
-                isDefault : true
-            }]
-    });
-
+    if (!!user) {
+        res.jsonWithReplacer({
+            success: true,
+            data: user.chats
+        }, 'ignoreArraysByKeys', ['users']);
+    } else {
+        res.json({ success:false });
+    }
 });
 
 module.exports = router;

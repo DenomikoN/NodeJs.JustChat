@@ -1,15 +1,16 @@
-﻿Ext.define('JustChat.model.ChatModel', {
-    extend: 'Ext.data.Model',
+﻿Ext.define('JustChat.model.Chat', {
+    extend: 'JustChat.model.Base',
     fields: [
         { name: 'title', type: 'string' },
         { name: 'isPrivate', type: 'boolean', defaultValue: false },
         { name: 'isDefault', type: 'boolean', defaultValue: false },
-        { name: 'ownerId', reference: 'JustChat.model.UserModel' },
+        { name: 'ownerId', reference: 'User' },
     ],
-    manyToMany: 'JustChat.model.UserModel',
+    manyToMany: 'User',
     proxy: {
         type: 'rest',
         url : '/rest/chat',
+        appendId: true,
         reader: {
             type: 'json',
             rootProperty: 'data'

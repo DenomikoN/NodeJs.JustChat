@@ -1,5 +1,5 @@
-﻿
-var session = require('express-session');
+﻿var session = require('express-session');
+
 
 function loadUser(req, res, next) {
     'use strict';
@@ -10,18 +10,28 @@ function loadUser(req, res, next) {
 module.exports.loadUser = loadUser;
 
 module.exports.apply = function (app) {
-    app.use(session({
+    
+    var sessionMiddleware = session({
+        sessionStore: app.store,
         name: 'justchat_session',
         secret: '111111111111111111',
         rolling: true,
         resave: false,
-        saveUninitialized:false
-    }), loadUser);
-    
+        saveUninitialized: false
+    });
     
 
+    app.store = new session.MemoryStore();
+    app.use(sessionMiddleware, loadUser);
+    app.io.use(function (socket, next) {
+        sessionMiddleware(socket.request, socket.request.res, next);
+    });
+    
+    require('../io/websocket').apply(app);
+
     app.use('/', require('../controllers/index'));
-    app.use('/chat', require('../controllers/chat'));
     app.use('/auth', require('../controllers/auth'));
     app.use('/rest', require('../controllers/rest'));
+
+    
 }
