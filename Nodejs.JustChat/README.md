@@ -1,9 +1,33 @@
 ﻿# JustChat
 
 
-**Links:**
+IDE: [MV Visual Studio 2013 + NTVS](https://github.com/Microsoft/nodejstools)
 
-https://github.com/andrey-karavaychik/nodejs-meetup
+SPA Framework: Sencha ExtJS 5.1.0 (MVC + MVVM)
 
-https://webmail.itechart-group.com/owa/redir.aspx?SURL=t4iKNyDs1cYsZG_aTKnumZB8PLRBekJFv9n0thzIOotAXGIC-kHSCGgAdAB0AHAAcwA6AC8ALwBkAG8AYwBzAC4AZwBvAG8AZwBsAGUALgBjAG8AbQAvAGQAbwBjAHUAbQBlAG4AdAAvAGQALwAxAHkAdABjADYAUQA1ADQAZgBfAE8ALQBXADQAZQBVAGQAUgBPAE4AMwBJAEkANgBHAHIAVQBNAEcATgBHAEEAMABmAGoARwB5AEsAUAB2AEoAWABwADgALwBlAGQAaQB0AD8AdQBzAHAAPQBzAGgAYQByAGkAbgBnAA..&URL=https%3a%2f%2fdocs.google.com%2fdocument%2fd%2f1ytc6Q54f_O-W4eUdRON3II6GrUMGNGA0fjGyKPvJXp8%2fedit%3fusp%3dsharing
+К сожалению не хватило времени на реализацию всего, что было задуманно.
 
+Есть задел на:
+
+ 1. Подключение базы (отдельный модуль для доступа к данным)
+ 2. Мультиканальность (готово на backend, но не усепел реализовать на UI)
+
+Технические сложности:
+
+1. Курс не покрыл тему сопряжения express c socket.io, пришлось много гуглить
+
+Решенные проблемы:
+
+1. Разобрался с модульной структурой nodejs
+2. Получение сессии express в запросах в socket.io (см модуль `config/routes`)
+3. Подобран шаблонизатор с поддержкой layouts и более-менее удобным синтаксисом ([ECT](http://ectjs.com/))
+4. Расширил express методом jsonWithReplacer (модуль `core/appExtensions` + `core/replacer`) для решения проблемы с циклическими ссылками в возвращаемом объекте
+5. Реализовал SPA приложение на новой версии ExtJS 5.1.0 с использованием нового подхода MVVM
+6. Использовал использованеи комнат в socket.io для рассылки сообщения в определенной комнате канала
+
+Хотелось бы реализовать:
+
+1. Допилить UI - добавление комнат
+2. Подключить базу, реализовать сохранение истории сообщений
+3. Упроситить работу с socket.io - структурировать логику
+   
