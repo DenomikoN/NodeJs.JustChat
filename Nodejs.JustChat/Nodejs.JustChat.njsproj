@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="bin\www.js" />
     <Compile Include="config\errors.js" />
     <Compile Include="config\render.js" />
     <Compile Include="config\routes.js" />
@@ -69,7 +70,6 @@
     <Compile Include="public\extjs\resources\crisp\ext-theme-crisp.js" />
     <Compile Include="public\extjs\resources\gray\ext-theme-gray-debug.js" />
     <Compile Include="public\extjs\resources\gray\ext-theme-gray.js" />
-    <Content Include="bin\www.js" />
     <Content Include="package.json" />
     <Content Include="public\extjs\resources\crisp\ext-theme-crisp-all-debug.css" />
     <Content Include="public\extjs\resources\crisp\ext-theme-crisp-all-debug_01.css" />
